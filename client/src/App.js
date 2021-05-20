@@ -2,9 +2,9 @@ import "./App.scss";
 
 function App() {
   return (
-    <div className="App">
+    <main className="App">
       <h1>Welcome to react</h1>
-    </div>
+    </main>
   );
 }
 
