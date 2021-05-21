@@ -1,9 +1,9 @@
-import "./App.scss";
+import Login from "./Components/Login";
 
 function App() {
   return (
-    <main className="App">
-      <h1>Welcome to react</h1>
+    <main>
+      <Login />
     </main>
   );
 }

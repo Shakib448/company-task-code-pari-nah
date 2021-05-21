@@ -1,8 +1,23 @@
 import React from "react";
-import { Container } from "@material-ui/core";
+import { Container, Typography, Grid, makeStyles } from "@material-ui/core";
+import clsx from "clsx";
+
+const useStyles = makeStyles(() => ({
+  root: {
+    padding: "40px",
+    fontFamily: '"Poppins", sans-serif',
+  },
+}));
 
 const Login = () => {
-  return <Container></Container>;
+  const classes = useStyles();
+  return (
+    <Container className={clsx(classes.root)}>
+      <Grid container justify="center">
+        <Typography variant="h4">Welcome to Login</Typography>
+      </Grid>
+    </Container>
+  );
 };
 
 export default Login;
