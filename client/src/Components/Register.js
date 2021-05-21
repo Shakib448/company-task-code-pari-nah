@@ -12,6 +12,8 @@ import {
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { registerAuthUser } from "../redux/slices/userSlice";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -29,9 +31,16 @@ const useStyles = makeStyles(() => ({
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data, e) => {
-    console.log(data);
-    e.target.reset();
+
+  const dispatch = useDispatch();
+
+  const onSubmit = async (data, e) => {
+    try {
+      dispatch(registerAuthUser(data));
+      e.target.reset();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const classes = useStyles();

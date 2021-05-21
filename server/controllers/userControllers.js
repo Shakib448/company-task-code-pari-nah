@@ -7,7 +7,7 @@ import generateToken from "../utils/generateToken.js";
 // @access  Public
 export const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
-  console.log(req.body);
+  console.log(name, email, password);
 
   // const userExists = await User.findOne({ email });
 
@@ -42,17 +42,19 @@ export const registerUser = asyncHandler(async (req, res) => {
 export const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await User.findOne({ email });
+  console.log(email, password);
 
-  if (user && (await user.matchPassword(password))) {
-    res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      token: generateToken(user._id),
-    });
-  } else {
-    res.status(401);
-    throw new Error("Invalid email or password");
-  }
+  // const user = await User.findOne({ email });
+
+  // if (user && (await user.matchPassword(password))) {
+  //   res.json({
+  //     _id: user._id,
+  //     name: user.name,
+  //     email: user.email,
+  //     token: generateToken(user._id),
+  //   });
+  // } else {
+  //   res.status(401);
+  //   throw new Error("Invalid email or password");
+  // }
 });

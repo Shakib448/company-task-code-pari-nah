@@ -13,7 +13,7 @@ import clsx from "clsx";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loginApi } from "../api/authApi";
+import { loginAuthUser } from "../redux/slices/userSlice";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -33,9 +33,13 @@ const Login = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
 
-  const onSubmit = (data, e) => {
-    dispatch(loginApi(data));
-    e.target.reset();
+  const onSubmit = async (data, e) => {
+    try {
+      dispatch(loginAuthUser(data));
+      e.target.reset();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const classes = useStyles();
