@@ -37,7 +37,7 @@ const Register = () => {
   const classes = useStyles();
   return (
     <Container className={clsx(classes.root)}>
-      <Grid container justify="center" md={8} lg={8} sm={12}>
+      <Grid item container justify="center" md={8} lg={8} sm={12}>
         <Paper className={clsx(classes.paper)}>
           <Typography variant="h4" align="center" gutterBottom>
             Welcome to Register

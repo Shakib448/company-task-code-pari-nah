@@ -12,6 +12,8 @@ import {
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginApi } from "../api/authApi";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -29,15 +31,17 @@ const useStyles = makeStyles(() => ({
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
+  const dispatch = useDispatch();
+
   const onSubmit = (data, e) => {
-    console.log(data);
+    dispatch(loginApi(data));
     e.target.reset();
   };
 
   const classes = useStyles();
   return (
     <Container className={clsx(classes.root)}>
-      <Grid container justify="center" md={8} lg={8} sm={12}>
+      <Grid item container justify="center" md={8} lg={8} sm={12}>
         <Paper className={clsx(classes.paper)}>
           <Typography variant="h4" align="center" gutterBottom>
             Welcome to Login
