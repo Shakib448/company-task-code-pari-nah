@@ -18,7 +18,9 @@ const userSlice = createSlice({
   name: "user",
   initialState: { loading: true, userInfo: [], error: {}, registerInfo: [] },
   reducers: {
-    loginUser: (state, action) => {},
+    errorMessage: (state, action) => {
+      console.log(action.payload);
+    },
   },
   extraReducers: {
     [loginAuthUser.pending]: (state, action) => {
@@ -30,7 +32,7 @@ const userSlice = createSlice({
     },
     [loginAuthUser.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.error;
+      state.error = "Invalid Email and Password";
     },
     [registerAuthUser.pending]: (state, action) => {
       state.loading = true;
@@ -46,7 +48,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { addUser } = userSlice.actions;
+export const { errorMessage } = userSlice.actions;
 
 export default userSlice.reducer;
 

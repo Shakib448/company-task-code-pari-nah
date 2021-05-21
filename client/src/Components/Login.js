@@ -35,6 +35,7 @@ const Login = () => {
 
   const onSubmit = (data, e) => {
     dispatch(loginAuthUser(data));
+    e.target.reset();
   };
 
   const classes = useStyles();
