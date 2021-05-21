@@ -1,8 +1,85 @@
 import React from "react";
-import { Container } from "@material-ui/core";
+import {
+  Container,
+  Typography,
+  Grid,
+  makeStyles,
+  TextField,
+  Button,
+  Paper,
+  Box,
+} from "@material-ui/core";
+import clsx from "clsx";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+
+const useStyles = makeStyles(() => ({
+  root: {
+    display: "flex",
+    justifyContent: "center",
+    height: "100vh",
+    alignItems: "center",
+  },
+  paper: {
+    padding: "20px 40px",
+    boxShadow: "5px 5px 50px lightgray",
+    borderRadius: "15px",
+  },
+}));
 
 const Register = () => {
-  return <Container></Container>;
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data, e) => {
+    console.log(data);
+    e.target.reset();
+  };
+
+  const classes = useStyles();
+  return (
+    <Container className={clsx(classes.root)}>
+      <Grid container justify="center" md={8} lg={8} sm={12}>
+        <Paper className={clsx(classes.paper)}>
+          <Typography variant="h4" align="center" gutterBottom>
+            Welcome to Register
+          </Typography>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Grid container direction="column">
+              <TextField
+                id="outlined-basic"
+                label="Full Name"
+                variant="outlined"
+                style={{ margin: "10px 0" }}
+                inputProps={{ ...register("name") }}
+              />
+              <TextField
+                id="outlined-basic"
+                label="Email"
+                variant="outlined"
+                style={{ margin: "10px 0" }}
+                inputProps={{ ...register("email") }}
+              />
+              <TextField
+                id="outlined-basic"
+                label="Password"
+                variant="outlined"
+                type="password"
+                style={{ margin: "10px 0" }}
+                inputProps={{ ...register("password") }}
+              />
+              <Button variant="contained" type="submit" color="primary">
+                Submit
+              </Button>
+              <Box mt={1}>
+                <Link to="/">
+                  <Typography variant="subtitle1">Login?</Typography>
+                </Link>
+              </Box>
+            </Grid>
+          </form>
+        </Paper>
+      </Grid>
+    </Container>
+  );
 };
 
 export default Register;

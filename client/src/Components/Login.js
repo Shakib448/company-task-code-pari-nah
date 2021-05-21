@@ -11,17 +11,19 @@ import {
 } from "@material-ui/core";
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   root: {
-    padding: "40px",
     display: "flex",
     justifyContent: "center",
     height: "100vh",
     alignItems: "center",
   },
   paper: {
-    padding: "40px",
+    padding: "20px 40px",
+    boxShadow: "5px 5px 50px lightgray",
+    borderRadius: "15px",
   },
 }));
 
@@ -61,7 +63,9 @@ const Login = () => {
                 Submit
               </Button>
               <Box mt={1}>
-                <Typography variant="subtitle1">Sign Up?</Typography>
+                <Link to="/register">
+                  <Typography variant="subtitle1">Sign Up?</Typography>
+                </Link>
               </Box>
             </Grid>
           </form>
