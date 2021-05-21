@@ -7,6 +7,7 @@ import {
   TextField,
   Button,
   Paper,
+  Box,
 } from "@material-ui/core";
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
@@ -14,7 +15,6 @@ import { useForm } from "react-hook-form";
 const useStyles = makeStyles(() => ({
   root: {
     padding: "40px",
-    fontFamily: '"Poppins", sans-serif',
     display: "flex",
     justifyContent: "center",
     height: "100vh",
@@ -60,6 +60,9 @@ const Login = () => {
               <Button variant="contained" type="submit" color="primary">
                 Submit
               </Button>
+              <Box mt={1}>
+                <Typography variant="subtitle1">Sign Up?</Typography>
+              </Box>
             </Grid>
           </form>
         </Paper>
