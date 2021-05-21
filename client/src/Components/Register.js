@@ -13,7 +13,7 @@ import clsx from "clsx";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loginAuthUser } from "../redux/slices/userSlice";
+import { registerAuthUser } from "../redux/slices/userSlice";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -29,13 +29,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Login = () => {
+const Register = () => {
   const { register, handleSubmit } = useForm();
+
   const dispatch = useDispatch();
 
   const onSubmit = async (data, e) => {
     try {
-      dispatch(loginAuthUser(data));
+      dispatch(registerAuthUser(data));
       e.target.reset();
     } catch (error) {
       console.log(error);
@@ -48,10 +49,17 @@ const Login = () => {
       <Grid item container justify="center" md={8} lg={8} sm={12}>
         <Paper className={clsx(classes.paper)}>
           <Typography variant="h4" align="center" gutterBottom>
-            Welcome to Login
+            Welcome to Register
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container direction="column">
+              <TextField
+                id="outlined-basic"
+                label="Full Name"
+                variant="outlined"
+                style={{ margin: "10px 0" }}
+                inputProps={{ ...register("name") }}
+              />
               <TextField
                 id="outlined-basic"
                 label="Email"
@@ -71,8 +79,8 @@ const Login = () => {
                 Submit
               </Button>
               <Box mt={1}>
-                <Link to="/register">
-                  <Typography variant="subtitle1">Sign Up?</Typography>
+                <Link to="/">
+                  <Typography variant="subtitle1">Login?</Typography>
                 </Link>
               </Box>
             </Grid>
@@ -83,4 +91,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
