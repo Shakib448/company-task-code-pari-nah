@@ -37,7 +37,9 @@ const Login = () => {
   const history = useHistory();
 
   useEffect(() => {
-    history.push("/home");
+    if (success) {
+      history.push("/home");
+    }
   }, [history, success]);
 
   const onSubmit = (data, e) => {

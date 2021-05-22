@@ -24,8 +24,9 @@ const userSlice = createSlice({
     success: false,
   },
   reducers: {
-    errorMessage: (state, action) => {
-      console.log(action.payload);
+    logOut: (state, action) => {
+      state.userInfo = [];
+      state.success = false;
     },
   },
   extraReducers: {
@@ -60,7 +61,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { errorMessage } = userSlice.actions;
+export const { logOut } = userSlice.actions;
 
 export default userSlice.reducer;
 
