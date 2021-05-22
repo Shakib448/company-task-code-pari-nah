@@ -4,8 +4,12 @@ import { registerApi, loginApi } from "../../api/authApi";
 export const loginAuthUser = createAsyncThunk(
   "user/login",
   async (authData, { getState }) => {
-    console.log(getState());
-    return loginApi(authData);
+    const {
+      entities: {
+        user: { userInfo },
+      },
+    } = getState();
+    return loginApi(authData, userInfo.token);
   }
 );
 export const registerAuthUser = createAsyncThunk(
