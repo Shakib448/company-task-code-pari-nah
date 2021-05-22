@@ -1,19 +1,16 @@
-import React, { useEffect } from "react";
 import {
   Container,
-  Typography,
   Grid,
   makeStyles,
+  Typography,
+  Paper,
   TextField,
   Button,
-  Paper,
   Box,
 } from "@material-ui/core";
 import clsx from "clsx";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { loginAuthUser, userInfo } from "../redux/slices/userSlice";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -28,59 +25,51 @@ const useStyles = makeStyles(() => ({
     borderRadius: "15px",
   },
 }));
-
-const Login = () => {
+const Home = () => {
+  const classes = useStyles();
   const { register, handleSubmit } = useForm();
-  const dispatch = useDispatch();
-
-  const { success } = useSelector(userInfo);
-  const history = useHistory();
-
-  useEffect(() => {
-    if (success) {
-      history.push("/home");
-    } else {
-      history.push("/");
-    }
-  }, [history, success]);
+  const [search, setSearch] = useState([]);
+  const [result, setResult] = useState([]);
 
   const onSubmit = (data, e) => {
-    dispatch(loginAuthUser(data));
-    e.target.reset();
+    setSearch(data.search);
+    setResult(data.result);
+    const sortToDb = Object.values(search).sort((a, b) => a - b);
+    console.log(sortToDb);
   };
 
-  const classes = useStyles();
+  const isResult = Object.values(search).filter((value) =>
+    result.includes(value)
+  );
+
   return (
     <Container className={clsx(classes.root)}>
       <Grid item container justify="center" md={8} lg={8} sm={12}>
         <Paper className={clsx(classes.paper)}>
-          <Typography variant="h4" align="center" gutterBottom>
-            Welcome to Login
-          </Typography>
+          <Typography variant="h4">Welcome Khoj</Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container direction="column">
               <TextField
                 id="outlined-basic"
-                label="Email"
+                label="Search"
                 variant="outlined"
                 style={{ margin: "10px 0" }}
-                inputProps={{ ...register("email") }}
+                inputProps={{ ...register("search") }}
               />
               <TextField
                 id="outlined-basic"
-                label="Password"
+                label="Result"
                 variant="outlined"
-                type="password"
                 style={{ margin: "10px 0" }}
-                inputProps={{ ...register("password") }}
+                inputProps={{ ...register("result") }}
               />
               <Button variant="contained" type="submit" color="primary">
-                Submit
+                Khoj
               </Button>
               <Box mt={1}>
-                <Link to="/register">
-                  <Typography variant="subtitle1">Sign Up?</Typography>
-                </Link>
+                <Typography variant="subtitle1">
+                  Result : {isResult.length !== 0 ? "True" : "False"}
+                </Typography>
               </Box>
             </Grid>
           </form>
@@ -90,4 +79,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Home;
