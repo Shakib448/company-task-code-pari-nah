@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAuthUser, userInfo } from "../redux/slices/userSlice";
+import Loader from "../Common/Loader";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -33,16 +34,16 @@ const Login = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
 
-  const { success } = useSelector(userInfo);
+  const { success, loading } = useSelector(userInfo);
   const history = useHistory();
 
-  useEffect(() => {
-    if (success) {
-      history.push("/home");
-    } else {
-      history.push("/");
-    }
-  }, [history, success]);
+  // useEffect(() => {
+  //   if (success) {
+  //     history.push("/home");
+  //   } else {
+  //     history.push("/");
+  //   }
+  // }, [history, success]);
 
   const onSubmit = (data, e) => {
     dispatch(loginAuthUser(data));
@@ -50,7 +51,9 @@ const Login = () => {
   };
 
   const classes = useStyles();
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <Container className={clsx(classes.root)}>
       <Grid item container justify="center" md={8} lg={8} sm={12}>
         <Paper className={clsx(classes.paper)}>

@@ -3,8 +3,13 @@ import { registerApi, loginApi } from "../../api/authApi";
 
 export const loginAuthUser = createAsyncThunk(
   "user/login",
-  async (authData) => {
-    return loginApi(authData);
+  async (authData, { getState }) => {
+    const {
+      entities: {
+        user: { userInfo },
+      },
+    } = getState();
+    return loginApi(authData, userInfo.token);
   }
 );
 export const registerAuthUser = createAsyncThunk(
@@ -14,11 +19,15 @@ export const registerAuthUser = createAsyncThunk(
   }
 );
 
+const userInfoFromStorage = localStorage.getItem("userInfo")
+  ? JSON.parse(localStorage.getItem("userInfo"))
+  : [];
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    loading: true,
-    userInfo: [],
+    loading: false,
+    userInfo: userInfoFromStorage,
     error: {},
     registerInfo: [],
     success: false,
