@@ -10,7 +10,7 @@ export const loginAuthUser = createAsyncThunk(
 export const registerAuthUser = createAsyncThunk(
   "user/register",
   async (registerData) => {
-    await registerApi(registerData);
+    return registerApi(registerData);
   }
 );
 
@@ -48,7 +48,7 @@ const userSlice = createSlice({
     },
     [registerAuthUser.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.error;
+      state.error = "User already exists";
     },
   },
 });
