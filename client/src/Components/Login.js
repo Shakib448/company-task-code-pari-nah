@@ -39,6 +39,8 @@ const Login = () => {
   useEffect(() => {
     if (success) {
       history.push("/home");
+    } else {
+      history.push("/");
     }
   }, [history, success]);
 

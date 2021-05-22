@@ -36,7 +36,11 @@ const Register = () => {
   const history = useHistory();
 
   useEffect(() => {
-    history.push("/home");
+    if (success) {
+      history.push("/home");
+    } else {
+      history.push("/");
+    }
   }, [history, success]);
 
   const onSubmit = (data, e) => {
