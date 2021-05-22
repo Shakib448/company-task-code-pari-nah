@@ -3,7 +3,8 @@ import { registerApi, loginApi } from "../../api/authApi";
 
 export const loginAuthUser = createAsyncThunk(
   "user/login",
-  async (authData) => {
+  async (authData, { getState }) => {
+    console.log(getState());
     return loginApi(authData);
   }
 );
