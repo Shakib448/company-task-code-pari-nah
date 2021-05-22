@@ -37,13 +37,13 @@ const Login = () => {
   const { success, loading } = useSelector(userInfo);
   const history = useHistory();
 
-  // useEffect(() => {
-  //   if (success) {
-  //     history.push("/home");
-  //   } else {
-  //     history.push("/");
-  //   }
-  // }, [history, success]);
+  useEffect(() => {
+    if (success) {
+      history.push("/home");
+    } else {
+      history.push("/");
+    }
+  }, [history, success]);
 
   const onSubmit = (data, e) => {
     dispatch(loginAuthUser(data));

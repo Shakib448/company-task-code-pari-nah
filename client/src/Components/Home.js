@@ -9,8 +9,11 @@ import {
   Box,
 } from "@material-ui/core";
 import clsx from "clsx";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { logOut, userInfo } from "../redux/slices/userSlice";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -30,6 +33,16 @@ const Home = () => {
   const { register, handleSubmit } = useForm();
   const [search, setSearch] = useState([]);
   const [result, setResult] = useState([]);
+
+  const dispatch = useDispatch();
+  const { success } = useSelector(userInfo);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!success) {
+      history.push("/");
+    }
+  }, [history, success]);
 
   const onSubmit = (data, e) => {
     setSearch(data.search);
@@ -66,13 +79,22 @@ const Home = () => {
               <Button variant="contained" type="submit" color="primary">
                 Khoj
               </Button>
-              <Box mt={1}>
-                <Typography variant="subtitle1">
+              <Box mt={1} mb={2}>
+                <Typography variant="subtitle1" align="center">
                   Result : {isResult.length !== 0 ? "True" : "False"}
                 </Typography>
               </Box>
             </Grid>
           </form>
+          <Grid container justify="center">
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={() => dispatch(logOut())}
+            >
+              Log Out
+            </Button>
+          </Grid>
         </Paper>
       </Grid>
     </Container>
