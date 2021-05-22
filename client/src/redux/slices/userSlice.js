@@ -16,7 +16,12 @@ export const registerAuthUser = createAsyncThunk(
 
 const userSlice = createSlice({
   name: "user",
-  initialState: { loading: true, userInfo: [], error: {}, registerInfo: [] },
+  initialState: {
+    loading: true,
+    userInfo: [],
+    error: {},
+    registerInfo: [],
+  },
   reducers: {
     errorMessage: (state, action) => {
       console.log(action.payload);
@@ -54,4 +59,4 @@ export default userSlice.reducer;
 
 // Selector
 
-export const userList = (state) => state.entities.shoppingCart;
+export const userInfo = (state) => state.entities.user;
