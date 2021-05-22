@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { loginApi, registerApi } from "../../api/authApi";
+import { registerApi, loginApi } from "../../api/authApi";
 
 export const loginAuthUser = createAsyncThunk(
   "user/login",
   async (authData) => {
-    await loginApi(authData);
+    return loginApi(authData);
   }
 );
 export const registerAuthUser = createAsyncThunk(
@@ -16,9 +16,16 @@ export const registerAuthUser = createAsyncThunk(
 
 const userSlice = createSlice({
   name: "user",
-  initialState: { loading: true, userInfo: [], error: {}, registerInfo: [] },
+  initialState: {
+    loading: true,
+    userInfo: [],
+    error: {},
+    registerInfo: [],
+  },
   reducers: {
-    loginUser: (state, action) => {},
+    errorMessage: (state, action) => {
+      console.log(action.payload);
+    },
   },
   extraReducers: {
     [loginAuthUser.pending]: (state, action) => {
@@ -30,7 +37,7 @@ const userSlice = createSlice({
     },
     [loginAuthUser.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.error;
+      state.error = "Invalid Email and Password";
     },
     [registerAuthUser.pending]: (state, action) => {
       state.loading = true;
@@ -46,10 +53,10 @@ const userSlice = createSlice({
   },
 });
 
-export const { addUser } = userSlice.actions;
+export const { errorMessage } = userSlice.actions;
 
 export default userSlice.reducer;
 
 // Selector
 
-export const userList = (state) => state.entities.shoppingCart;
+export const userInfo = (state) => state.entities.user;

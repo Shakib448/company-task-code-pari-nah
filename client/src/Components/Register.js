@@ -34,13 +34,9 @@ const Register = () => {
 
   const dispatch = useDispatch();
 
-  const onSubmit = async (data, e) => {
-    try {
-      dispatch(registerAuthUser(data));
-      e.target.reset();
-    } catch (error) {
-      console.log(error);
-    }
+  const onSubmit = (data, e) => {
+    dispatch(registerAuthUser(data));
+    e.target.reset();
   };
 
   const classes = useStyles();

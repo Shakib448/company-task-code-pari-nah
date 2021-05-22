@@ -33,13 +33,9 @@ const Login = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
 
-  const onSubmit = async (data, e) => {
-    try {
-      dispatch(loginAuthUser(data));
-      e.target.reset();
-    } catch (error) {
-      console.log(error);
-    }
+  const onSubmit = (data, e) => {
+    dispatch(loginAuthUser(data));
+    e.target.reset();
   };
 
   const classes = useStyles();
