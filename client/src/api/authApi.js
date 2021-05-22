@@ -6,10 +6,6 @@ export const loginApi = async (loginData) => {
 };
 
 export const registerApi = async (registerData) => {
-  try {
-    const { data } = Axios.post("/api/users", registerData);
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
+  const { data } = await Axios.post("/api/users", registerData);
+  return data;
 };
