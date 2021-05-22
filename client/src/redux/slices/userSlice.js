@@ -14,11 +14,15 @@ export const registerAuthUser = createAsyncThunk(
   }
 );
 
+const userInfoFromStorage = localStorage.getItem("userInfo")
+  ? JSON.parse(localStorage.getItem("userInfo"))
+  : [];
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    loading: true,
-    userInfo: [],
+    loading: false,
+    userInfo: userInfoFromStorage,
     error: {},
     registerInfo: [],
     success: false,

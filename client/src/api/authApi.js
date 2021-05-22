@@ -2,6 +2,7 @@ import Axios from "../AxiosConfig/AxiosConfig";
 
 export const loginApi = async (loginData) => {
   const { data } = await Axios.post("/api/users/login", loginData);
+  localStorage.setItem("userInfo", JSON.stringify(data));
   return data;
 };
 
