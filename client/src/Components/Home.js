@@ -9,8 +9,8 @@ import {
   Box,
 } from "@material-ui/core";
 import clsx from "clsx";
-import React from "react";
-import { useForm } from "react-hook-form";
+import React, { useState } from "react";
+// import { useForm } from "react-hook-form";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -27,11 +27,13 @@ const useStyles = makeStyles(() => ({
 }));
 const Home = () => {
   const classes = useStyles();
-  const { register, handleSubmit } = useForm();
+  // const { register, handleSubmit } = useForm();
+  const [search, setSearch] = useState([]);
+  const [result, setResult] = useState([]);
+  console.log(Object.values(search));
 
-  const onSubmit = (data, e) => {
-    console.log(data);
-    e.target.reset();
+  const onSubmit = (e) => {
+    e.preventDefault();
   };
 
   return (
@@ -39,22 +41,25 @@ const Home = () => {
       <Grid item container justify="center" md={8} lg={8} sm={12}>
         <Paper className={clsx(classes.paper)}>
           <Typography variant="h4">Welcome Khoj</Typography>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={onSubmit}>
             <Grid container direction="column">
               <TextField
                 id="outlined-basic"
                 label="Search"
                 variant="outlined"
                 style={{ margin: "10px 0" }}
-                inputProps={{ ...register("email") }}
+                // inputProps={{ ...register("search") }}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
               <TextField
                 id="outlined-basic"
                 label="Result"
                 variant="outlined"
-                type="password"
                 style={{ margin: "10px 0" }}
-                inputProps={{ ...register("password") }}
+                // inputProps={{ ...register("result") }}
+                value={result}
+                onChange={(e) => setResult(e.target.value)}
               />
               <Button variant="contained" type="submit" color="primary">
                 Khoj
