@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Container,
   Typography,
@@ -11,9 +11,9 @@ import {
 } from "@material-ui/core";
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { loginAuthUser } from "../redux/slices/userSlice";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAuthUser, userInfo } from "../redux/slices/userSlice";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -32,6 +32,13 @@ const useStyles = makeStyles(() => ({
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
+
+  const { success } = useSelector(userInfo);
+  const history = useHistory();
+
+  useEffect(() => {
+    history.push("/home");
+  }, [history, success]);
 
   const onSubmit = (data, e) => {
     dispatch(loginAuthUser(data));
