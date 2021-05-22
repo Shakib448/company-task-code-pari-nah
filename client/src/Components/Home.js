@@ -34,6 +34,8 @@ const Home = () => {
   const onSubmit = (data, e) => {
     setSearch(data.search);
     setResult(data.result);
+    const sortToDb = Object.values(search).sort((a, b) => a - b);
+    console.log(sortToDb);
   };
 
   const isResult = Object.values(search).filter((value) =>
