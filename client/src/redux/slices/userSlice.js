@@ -28,9 +28,10 @@ const userSlice = createSlice({
     success: true,
   },
   reducers: {
-    logOut: (state, action) => {
+    logOut: (state) => {
       state.userInfo = [];
       state.success = false;
+      localStorage.removeItem("userInfo");
     },
   },
   extraReducers: {
