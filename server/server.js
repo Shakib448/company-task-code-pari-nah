@@ -5,6 +5,7 @@ import "colors";
 import morgan from "morgan";
 import cors from "cors";
 import userRoutes from "./routes/userRoutes.js";
+import khojRoutes from "./routes/khojRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 const PORT = process.env.PORT || 5000;
 
@@ -22,6 +23,7 @@ connectDB();
 
 // Api routes
 app.use("/api/users", userRoutes);
+app.use("/api/khoj", khojRoutes);
 
 app.get("/", (req, res) => {
   res.send("API is running....");
