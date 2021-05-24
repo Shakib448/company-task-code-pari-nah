@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const khojSlice = createSlice({
-  name: "user",
+  name: "khoj",
   initialState: {
     loading: false,
     success: true,
@@ -10,7 +10,6 @@ const khojSlice = createSlice({
   reducers: {
     khoj: (state, action) => {
       console.log(action.payload);
-
       //   state.khoj.push(action.payload);
     },
   },
@@ -22,4 +21,4 @@ export default khojSlice.reducer;
 
 // Selector
 
-export const userInfo = (state) => state.entities.user;
+export const khojSelector = (state) => state.entities.khoj;

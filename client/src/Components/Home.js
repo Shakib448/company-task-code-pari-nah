@@ -45,12 +45,11 @@ const Home = () => {
     }
   }, [history, success]);
 
-  const onSubmit = (data, e) => {
+  const onSubmit = (data) => {
     setSearch(data.search);
     setResult(data.result);
-    const sortToDb = Object.values(search).sort((a, b) => a - b);
+    const sortToDb = Object.values(data.search).sort((a, b) => a - b);
     let unique = [...new Set(sortToDb)];
-    console.log(unique);
     dispatch(khoj(unique));
   };
 
