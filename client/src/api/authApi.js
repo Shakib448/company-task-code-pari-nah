@@ -12,6 +12,7 @@ export const registerApi = async (registerData) => {
 };
 
 export const khojApi = async (khojData) => {
-  const { data } = await Axios.post("/api/khoj", khojData);
-  return data;
+  console.log(khojData);
+  // const { data } = await Axios.post("/api/khoj", khojData);
+  // return data;
 };
