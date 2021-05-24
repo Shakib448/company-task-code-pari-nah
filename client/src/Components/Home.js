@@ -49,10 +49,9 @@ const Home = () => {
     setSearch(data.search);
     setResult(data.result);
     const sortToDb = Object.values(search).sort((a, b) => a - b);
-    const isMatch = Object.values(search).filter((value) =>
-      result.includes(sortToDb)
-    );
-    dispatch(khoj({ isMatch }));
+    let unique = [...new Set(sortToDb)];
+    console.log(unique);
+    dispatch(khoj(unique));
   };
 
   const isResult = Object.values(search).filter((value) =>

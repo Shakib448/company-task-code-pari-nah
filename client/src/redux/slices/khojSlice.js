@@ -10,6 +10,7 @@ const khojSlice = createSlice({
   reducers: {
     khoj: (state, action) => {
       console.log(action.payload);
+
       //   state.khoj.push(action.payload);
     },
   },
