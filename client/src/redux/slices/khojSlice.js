@@ -1,25 +1,49 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { khojApi } from "../../api/authApi";
 
+export const khojPost = createAsyncThunk(
+  "khoj/post",
+  async (search, { getState }) => {
+    const {
+      entities: {
+        user: { userInfo },
+      },
+    } = getState();
+
+    return khojApi({ search, userInfo });
+  }
+);
+
+export const khojGet = createAsyncThunk("khoj/get", async (data) => {
+  return khojApi(data);
+});
 const khojSlice = createSlice({
-  name: "user",
+  name: "khoj",
   initialState: {
     loading: false,
     success: true,
     khoj: [],
   },
-  reducers: {
-    khoj: (state, action) => {
-      console.log(action.payload);
-
-      //   state.khoj.push(action.payload);
+  extraReducers: {
+    [khojPost.pending]: (state, action) => {
+      state.loading = true;
+      state.success = false;
+    },
+    [khojPost.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.userInfo = action.payload;
+      state.success = true;
+    },
+    [khojPost.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+      state.success = false;
     },
   },
 });
-
-export const { khoj } = khojSlice.actions;
 
 export default khojSlice.reducer;
 
 // Selector
 
-export const userInfo = (state) => state.entities.user;
+export const khojSelector = (state) => state.entities.khoj;

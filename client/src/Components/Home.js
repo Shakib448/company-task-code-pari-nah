@@ -13,7 +13,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { khoj } from "../redux/slices/khojSlice";
+import { khojPost } from "../redux/slices/khojSlice";
 import { logOut, userInfo } from "../redux/slices/userSlice";
 
 const useStyles = makeStyles(() => ({
@@ -45,13 +45,12 @@ const Home = () => {
     }
   }, [history, success]);
 
-  const onSubmit = (data, e) => {
+  const onSubmit = (data) => {
     setSearch(data.search);
     setResult(data.result);
-    const sortToDb = Object.values(search).sort((a, b) => a - b);
+    const sortToDb = Object.values(data.search).sort((a, b) => a - b);
     let unique = [...new Set(sortToDb)];
-    console.log(unique);
-    dispatch(khoj(unique));
+    dispatch(khojPost(unique.toString()));
   };
 
   const isResult = Object.values(search).filter((value) =>
