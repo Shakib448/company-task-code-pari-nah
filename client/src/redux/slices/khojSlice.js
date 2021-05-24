@@ -1,9 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { khojApi } from "../../api/authApi";
 
-export const khojPost = createAsyncThunk("khoj/post", async (data) => {
-  return khojApi(data);
-});
+export const khojPost = createAsyncThunk(
+  "khoj/post",
+  async (search, { getState }) => {
+    const {
+      entities: {
+        user: { userInfo },
+      },
+    } = getState();
+
+    return khojApi({ search, userInfo });
+  }
+);
 
 export const khojGet = createAsyncThunk("khoj/get", async (data) => {
   return khojApi(data);

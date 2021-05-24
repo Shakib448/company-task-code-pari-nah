@@ -4,15 +4,11 @@ const khojSchema = mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
       ref: "User",
     },
-    payload: [
+    search: [
       {
-        input_values: {
-          type: String,
-        },
-        default: Date,
+        type: String,
       },
     ],
   },

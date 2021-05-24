@@ -1,8 +1,8 @@
 import express from "express";
-import { khoj } from "../controllers/khojControllers.js";
+import { khojs } from "../controllers/khojControllers.js";
 
 const router = express.Router();
 
-router.post("/", khoj);
+router.post("/", khojs);
 
 export default router;
