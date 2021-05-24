@@ -3,13 +3,8 @@ import { registerApi, loginApi } from "../../api/authApi";
 
 export const loginAuthUser = createAsyncThunk(
   "user/login",
-  async (authData, { getState }) => {
-    const {
-      entities: {
-        user: { userInfo },
-      },
-    } = getState();
-    return loginApi(authData, userInfo.token);
+  async (authData) => {
+    return loginApi(authData);
   }
 );
 export const registerAuthUser = createAsyncThunk(
@@ -30,12 +25,13 @@ const userSlice = createSlice({
     userInfo: userInfoFromStorage,
     error: {},
     registerInfo: [],
-    success: false,
+    success: true,
   },
   reducers: {
-    logOut: (state, action) => {
+    logOut: (state) => {
       state.userInfo = [];
       state.success = false;
+      localStorage.removeItem("userInfo");
     },
   },
   extraReducers: {
