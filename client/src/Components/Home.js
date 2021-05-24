@@ -50,7 +50,7 @@ const Home = () => {
     setResult(data.result);
     const sortToDb = Object.values(data.search).sort((a, b) => a - b);
     let unique = [...new Set(sortToDb)];
-    dispatch(khoj(unique));
+    dispatch(khoj(unique.toString()));
   };
 
   const isResult = Object.values(search).filter((value) =>

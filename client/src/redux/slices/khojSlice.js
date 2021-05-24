@@ -4,13 +4,11 @@ const khojSlice = createSlice({
   name: "khoj",
   initialState: {
     loading: false,
-    success: true,
     khoj: [],
   },
   reducers: {
     khoj: (state, action) => {
-      console.log(action.payload);
-      //   state.khoj.push(action.payload);
+      state.khoj.push(action.payload);
     },
   },
 });
