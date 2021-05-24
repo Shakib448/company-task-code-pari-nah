@@ -10,3 +10,8 @@ export const registerApi = async (registerData) => {
   const { data } = await Axios.post("/api/users", registerData);
   return data;
 };
+
+export const khojApi = async (khojData) => {
+  const { data } = await Axios.post("/api/khoj", khojData);
+  return data;
+};

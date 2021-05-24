@@ -1,4 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { khojApi } from "../../api/authApi";
+
+export const khojPost = createAsyncThunk("user/register", async (data) => {
+  return khojApi(data);
+});
 
 const khojSlice = createSlice({
   name: "khoj",
