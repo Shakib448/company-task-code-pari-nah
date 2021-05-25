@@ -6,9 +6,10 @@ const khojSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    search: [
+    input_values: [
       {
         type: String,
+        trim: true,
       },
     ],
   },

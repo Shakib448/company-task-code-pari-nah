@@ -10,7 +10,7 @@ export const khojPost = createAsyncThunk(
       },
     } = getState();
 
-    return khojApi({ search, userInfo });
+    return khojApi(search, userInfo);
   }
 );
 
