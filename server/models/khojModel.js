@@ -10,6 +10,7 @@ const khojSchema = mongoose.Schema(
       {
         type: String,
         trim: true,
+        default: Date.now,
       },
     ],
   },
