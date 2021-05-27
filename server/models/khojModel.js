@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const khojSchema = mongoose.Schema(
   {
-    user: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
@@ -10,6 +10,7 @@ const khojSchema = mongoose.Schema(
       {
         type: String,
         trim: true,
+        default: Date.now,
       },
     ],
   },
